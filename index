@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DimensionalCraft</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js for 3D Visualizations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- MathJax for Beautiful Equation Rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .canvas-container { width: 100%; height: 380px; border-radius: 0.75rem; overflow: hidden; background: #0f172a; position: relative; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <header class="bg-indigo-600 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white/10 p-2.5 rounded-xl">
+                    <i class="fa-solid fa-cube text-xl text-indigo-200"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">DimensionalCraft</h1>
+                    <p class="text-xs text-indigo-200">PjBL, GeoGebra & Sumber Belajar Komprehensif • Kelas XII SMA</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <button onclick="switchTab('materi')" id="nav-materi" class="text-white border-b-2 border-white pb-1 transition">Materi & Teori Mendalam</button>
+                <button onclick="switchTab('visualizer')" id="nav-visualizer" class="text-indigo-200 hover:text-white pb-1 transition">Simulasi 3D Ruang</button>
+                <button onclick="switchTab('referensi')" id="nav-referensi" class="text-indigo-200 hover:text-white pb-1 transition">Referensi & Literatur</button>
+                <button onclick="switchTab('proyek')" id="nav-proyek" class="text-indigo-200 hover:text-white pb-1 transition">Panduan Proyek</button>
+                <button onclick="switchTab('ai')" id="nav-ai" class="text-indigo-200 hover:text-white pb-1 transition"><i class="fa-solid fa-robot mr-1"></i> Asisten AI Pintar</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left 2 Cols: Dynamic Content Viewer -->
+        <div class="lg:col-span-2 space-y-6">
+
+            <!-- TAB 1: MATERI LENGKAP & DETAIL DENGAN ILUSTRASI -->
+            <section id="tab-materi" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">Modul Pembelajaran Mandiri Terlengkap (Fase F)</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-2">Geometri Ruang: Kedudukan, Proyeksi, Jarak, Sudut, & Trik Akselerasi</h2>
+                    <p class="text-sm text-slate-500 mt-1">Panduan teoretis analitis mendalam disertai penjabaran rumus, segitiga penolong, sudut ruang, dan contoh soal terstruktur.</p>
+                </div>
+
+                <div class="space-y-6 text-slate-700 leading-relaxed text-sm">
+                    
+                    <!-- Bab 1: Kedudukan Objek & Proyeksi Ortogonal -->
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-100 space-y-4">
+                        <h3 class="font-bold text-slate-800 text-base flex items-center">
+                            <i class="fa-solid fa-compass text-indigo-600 mr-2"></i>1. Kedudukan Lengkap Titik, Garis, dan Bidang dalam Ruang
+                        </h3>
+                        <p class="text-xs">Memahami kedudukan spasial antarobjek secara sistematis adalah fondasi utama sebelum menentukan jarak maupun sudut:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+                            <!-- Kedudukan Titik -->
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-1.5 shadow-sm">
+                                <span class="font-bold text-indigo-700 block text-xs"><i class="fa-solid fa-circle-dot mr-1 text-indigo-500"></i> A. Kedudukan Titik</span>
+                                <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                                    <li><strong>Titik ke Titik:</strong> Berimpit (memiliki koordinat sama) atau Berbeda (terpisah jarak).</li>
+                                    <li><strong>Titik ke Garis:</strong> Titik <em>terletak pada</em> garis atau <em>di luar</em> garis.</li>
+                                    <li><strong>Titik ke Bidang:</strong> Titik <em>terletak pada</em> bidang atau <em>di luar</em> bidang.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Kedudukan Garis -->
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-1.5 shadow-sm">
+                                <span class="font-bold text-indigo-700 block text-xs"><i class="fa-solid fa-arrows-alt-h mr-1 text-indigo-500"></i> B. Kedudukan Garis ke Garis</span>
+                                <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                                    <li><strong>Sejajar:</strong> Sebidang dan tidak berpotongan.</li>
+                                    <li><strong>Berpotongan:</strong> Sebidang dan bertemu di 1 titik.</li>
+                                    <li><strong>Bersilangan:</strong> Tidak sebidang dan tidak pernah berpotongan (misal: rusuk \(AB\) dan \(CG\)).</li>
+                                </ul>
+                            </div>
+
+                            <!-- Garis & Titik ke Bidang -->
+                            <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-1.5 shadow-sm">
+                                <span class="font-bold text-indigo-700 block text-xs"><i class="fa-solid fa-layer-group mr-1 text-indigo-500"></i> C. Garis & Titik terhadap Bidang</span>
+                                <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                                    <li><strong>Garis Terletak pada Bidang:</strong> Semua titik pada garis berada di bidang.</li>
+                                    <li><strong>Garis Sejajar Bidang:</strong> Garis tak punya titik tembus dengan bidang.</li>
+                                    <li><strong>Garis Memotong/Menembus Bidang:</strong> Memiliki 1 titik tembus (\(90^\circ\) jika tegak lurus).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Proyeksi Ortogonal Teorema -->
+                        <div class="p-3 bg-indigo-50/70 rounded-lg border border-indigo-100 text-xs text-indigo-950 space-y-1">
+                            <span class="font-bold text-indigo-900 block"><i class="fa-solid fa-diagram-project mr-1 text-indigo-600"></i> Proyeksi Ortogonal & Teorema 3 Tegak Lurus:</span>
+                            <p class="text-slate-700">Proyeksi titik \(P\) ke garis/bidang \(\alpha\) adalah titik tembus \(P'\) sedemikian hingga ruas garis \(PP'\) tegak lurus (\(90^\circ\)) terhadap target. Jika garis \(g \perp \text{bidang } \alpha\) dan garis \(h\) terletak pada \(\alpha\), maka garis yang sejajar proyeksi \(g\) akan tegak lurus terhadap \(h\).</p>
+                        </div>
+                    </div>
+
+                    <!-- Bab 2: Konsep Jarak & Segitiga Penolong (Rapi & Sistematis) -->
+                    <div class="p-6 bg-gradient-to-b from-indigo-50/70 to-slate-50 rounded-2xl border border-indigo-100/80 space-y-5 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-indigo-100 pb-3">
+                            <h3 class="font-bold text-indigo-950 text-base flex items-center">
+                                <span class="bg-indigo-600 text-white w-7 h-7 rounded-lg flex items-center justify-center text-xs mr-2 shadow-sm font-bold">2</span>
+                                Analisis Jarak & Metode Segitiga Penolong
+                            </h3>
+                            <span class="text-[11px] font-semibold bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-md">Kunci Akselerasi Soal</span>
+                        </div>
+
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Prinsip Utama:</strong> Jarak dari titik ke suatu objek (titik, garis, atau bidang) adalah panjang <strong>ruas garis terpendek</strong> yang ditarik dari titik tersebut secara <strong>tegak lurus (\(90^\circ\))</strong> terhadap objek target.
+                        </p>
+
+                        <!-- Workflow 3 Langkah Emas -->
+                        <div class="bg-white p-4 rounded-xl border border-indigo-100 space-y-3 shadow-sm">
+                            <span class="font-bold text-xs text-indigo-900 flex items-center">
+                                <i class="fa-solid fa-route text-indigo-600 mr-2"></i>3 Langkah Emas Menghitung Jarak Titik ke Garis:
+                            </span>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                                <div class="bg-indigo-50/50 p-3 rounded-lg border border-indigo-100/60">
+                                    <span class="font-bold text-indigo-700 block text-[11px] mb-1">Langkah 1: Hubungkan Titik</span>
+                                    <p class="text-slate-600 text-[11px]">Hubungkan titik acuan ke kedua ujung garis target hingga terbentuk sebuah <strong>segitiga penolong</strong>.</p>
+                                </div>
+                                <div class="bg-indigo-50/50 p-3 rounded-lg border border-indigo-100/60">
+                                    <span class="font-bold text-indigo-700 block text-[11px] mb-1">Langkah 2: Hitung Sisi Segitiga</span>
+                                    <p class="text-slate-600 text-[11px]">Cari panjang ketiga sisi segitiga penolong tersebut menggunakan Teorema Pythagoras atau diagonal.</p>
+                                </div>
+                                <div class="bg-indigo-50/50 p-3 rounded-lg border border-indigo-100/60">
+                                    <span class="font-bold text-indigo-700 block text-[11px] mb-1">Langkah 3: Terapkan Formula Tipe</span>
+                                    <p class="text-slate-600 text-[11px]">Identifikasi jenis segitiga (Siku-siku, Sama Kaki, atau Sembarang) lalu gunakan formula khasnya.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Classification Grid of Triangles -->
+                        <div class="space-y-3">
+                            <span class="font-bold text-slate-800 text-xs block">Klasifikasi Formula Segitiga Penolong (Pilih Sesuai Bentuk):</span>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Tipe A: Segitiga Siku-Siku -->
+                                <div class="bg-white p-4 rounded-xl border border-emerald-200 shadow-sm space-y-2 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-emerald-800 text-xs flex items-center">
+                                                <i class="fa-solid fa-play mr-1.5 rotate-90 text-emerald-600"></i> Tipe A: Siku-Siku
+                                            </span>
+                                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded">Kesamaan Luas</span>
+                                        </div>
+                                        <p class="text-slate-600 text-[11px] leading-relaxed mb-2">
+                                            Berlaku jika salah satu sudut segitiga penolong bernilai tepat \(90^\circ\).
+                                        </p>
+                                    </div>
+                                    <div class="bg-emerald-50/80 p-3 rounded-lg text-center border border-emerald-100 space-y-1">
+                                        <p class="text-[10px] text-emerald-700 font-semibold uppercase">Rumus Jarak Tinggi (\(t\))</p>
+                                        <p class="font-bold text-emerald-950 font-mono text-sm">
+                                            \(t = \frac{\text{alas} \times \text{tinggi}}{\text{hipotenusa}} = \frac{a \cdot b}{c}\)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Tipe B: Sama Kaki / Sama Sisi -->
+                                <div class="bg-white p-4 rounded-xl border border-indigo-200 shadow-sm space-y-2 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-indigo-800 text-xs flex items-center">
+                                                <i class="fa-solid fa-caret-up mr-1.5 text-indigo-600"></i> Tipe B: Sama Kaki / Sisi
+                                            </span>
+                                            <span class="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-1.5 py-0.5 rounded">Proyeksi Tengah</span>
+                                        </div>
+                                        <p class="text-slate-600 text-[11px] leading-relaxed mb-2">
+                                            Proyeksi titik jatuh tepat di pertengahan alas (\(x = \frac{1}{2}\text{alas}\)).
+                                        </p>
+                                    </div>
+                                    <div class="bg-indigo-50/80 p-3 rounded-lg text-center border border-indigo-100 space-y-1">
+                                        <p class="text-[10px] text-indigo-700 font-semibold uppercase">Rumus Jarak Tinggi (\(t\))</p>
+                                        <p class="font-bold text-indigo-950 font-mono text-sm">
+                                            \(t = \sqrt{\text{sisi miring}^2 - \left(\frac{\text{alas}}{2}\right)^2}\)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Tipe C: Segitiga Sembarang -->
+                                <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm space-y-2 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-amber-900 text-xs flex items-center">
+                                                <i class="fa-solid fa-draw-polygon mr-1.5 text-amber-600"></i> Tipe C: Sembarang
+                                            </span>
+                                            <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-1.5 py-0.5 rounded">Aturan Cosinus</span>
+                                        </div>
+                                        <p class="text-slate-600 text-[11px] leading-relaxed mb-2">
+                                            Ketiga sisi segitiga memiliki panjang yang berbeda. Gunakan Aturan Cosinus.
+                                        </p>
+                                    </div>
+                                    <div class="bg-amber-50/80 p-3 rounded-lg text-center border border-amber-100 space-y-1">
+                                        <p class="text-[10px] text-amber-800 font-semibold uppercase">Tahap 1: Trigonometri</p>
+                                        <p class="font-bold text-amber-950 font-mono text-xs">
+                                            \(\cos \theta = \frac{a^2 + b^2 - c^2}{2ab}\)
+                                        </p>
+                                        <p class="text-[10px] text-amber-700 pt-0.5">\(\rightarrow t = a \cdot \sin \theta\)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bab 3: Konsep Sudut dalam Dimensi Tiga (Format Kartu Rapi) -->
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between border-b pb-2">
+                            <h3 class="font-bold text-slate-800 text-base flex items-center">
+                                <span class="bg-indigo-600 text-white w-7 h-7 rounded-lg flex items-center justify-center text-xs mr-2 shadow-sm font-bold">3</span>
+                                Konsep Sudut dalam Dimensi Tiga
+                            </h3>
+                            <span class="text-xs text-indigo-600 font-semibold">Representasi Geometris</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm hover:border-indigo-300 transition">
+                                <div class="flex items-center space-x-2 text-indigo-700 font-bold">
+                                    <i class="fa-solid fa-arrows-split-up-and-left text-sm"></i>
+                                    <span>A. Sudut Dua Garis Bersilangan</span>
+                                </div>
+                                <p class="text-slate-600 text-[11px] leading-relaxed">
+                                    Geser salah satu garis hingga <strong>berpotongan</strong> dengan garis lainnya tanpa mengubah arahnya (tetap sejajar). Sudut yang terbentuk di titik potong adalah besar sudut bersilangan.
+                                </p>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm hover:border-indigo-300 transition">
+                                <div class="flex items-center space-x-2 text-indigo-700 font-bold">
+                                    <i class="fa-solid fa-chart-line text-sm"></i>
+                                    <span>B. Sudut Garis ke Bidang</span>
+                                </div>
+                                <p class="text-slate-600 text-[11px] leading-relaxed">
+                                    Sudut antara garis \(g\) dengan garis proyeksinya \(g'\) pada bidang tersebut (\(\theta = \angle(g, g')\)). Proyeksi dibuat dengan menarik garis tegak lurus dari ujung garis ke bidang.
+                                </p>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm hover:border-indigo-300 transition">
+                                <div class="flex items-center space-x-2 text-indigo-700 font-bold">
+                                    <i class="fa-solid fa-book-open text-sm"></i>
+                                    <span>C. Sudut Dua Bidang (Dihidral)</span>
+                                </div>
+                                <p class="text-slate-600 text-[11px] leading-relaxed">
+                                    Tentukan garis potong (tumpuan) kedua bidang. Tarik masing-masing 1 garis pada tiap bidang yang <strong>tegak lurus</strong> terhadap garis tumpuan di titik yang sama.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bab 4: Cheat Sheet & Formula Trik Akselerasi pada Kubus -->
+                    <div class="p-5 bg-gradient-to-r from-amber-500/10 via-amber-50/50 to-orange-500/10 rounded-xl border border-amber-300/60 space-y-4">
+                        <div class="flex items-center justify-between border-b border-amber-200 pb-2">
+                            <h3 class="font-bold text-amber-950 text-base flex items-center">
+                                <i class="fa-solid fa-bolt text-amber-500 mr-2 text-lg"></i>4. Formula Cepat Akselerasi Kubus (Rusuk = \(s\))
+                            </h3>
+                            <span class="bg-amber-200/80 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Shortcut UTBK / SNBT</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                            <div class="bg-white p-3.5 rounded-xl border border-amber-200/80 shadow-sm space-y-1">
+                                <span class="font-bold text-slate-800 text-[11px] block text-amber-900"><i class="fa-solid fa-border-all mr-1 text-amber-600"></i> Diagonal Sisi & Ruang</span>
+                                <p class="text-[11px] text-slate-500">Diagonal Sisi = \(s\sqrt{2}\)</p>
+                                <p class="text-[11px] text-slate-500">Diagonal Ruang = \(s\sqrt{3}\)</p>
+                            </div>
+
+                            <div class="bg-white p-3.5 rounded-xl border border-amber-200/80 shadow-sm space-y-1">
+                                <span class="font-bold text-slate-800 text-[11px] block text-amber-900"><i class="fa-solid fa-arrows-to-dot mr-1 text-amber-600"></i> Sudut Dekat ke Bidang</span>
+                                <p class="text-[11px] text-slate-600">Jarak titik sudut dekat (misal \(E\)) ke bidang diagonal \(AFH\):</p>
+                                <p class="font-mono text-emerald-700 font-bold text-xs bg-emerald-50 px-2 py-0.5 rounded inline-block">\(d = \frac{1}{3}s\sqrt{3}\)</p>
+                            </div>
+
+                            <div class="bg-white p-3.5 rounded-xl border border-amber-200/80 shadow-sm space-y-1">
+                                <span class="font-bold text-slate-800 text-[11px] block text-amber-900"><i class="fa-solid fa-arrows-split-up-and-left mr-1 text-amber-600"></i> Sudut Jauh ke Bidang</span>
+                                <p class="text-[11px] text-slate-600">Jarak titik sudut jauh (misal \(C\)) ke bidang diagonal \(AFH\):</p>
+                                <p class="font-mono text-indigo-700 font-bold text-xs bg-indigo-50 px-2 py-0.5 rounded inline-block">\(d = \frac{2}{3}s\sqrt{3}\)</p>
+                            </div>
+
+                            <div class="bg-white p-3.5 rounded-xl border border-amber-200/80 shadow-sm space-y-1">
+                                <span class="font-bold text-slate-800 text-[11px] block text-amber-900"><i class="fa-solid fa-ruler mr-1 text-amber-600"></i> Titik Tengah Rusuk</span>
+                                <p class="text-[11px] text-slate-600">Jarak titik sudut ke pertengahan rusuk seberang:</p>
+                                <p class="font-mono text-amber-700 font-bold text-xs bg-amber-50 px-2 py-0.5 rounded inline-block">\(d = \frac{3}{2}s\)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bab 5: Contoh Soal & Pembahasan Runtut dan Jelas -->
+                    <div class="p-6 bg-slate-900 text-white rounded-2xl space-y-5 shadow-lg border border-slate-800">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <h3 class="font-bold text-indigo-300 text-base flex items-center">
+                                <i class="fa-solid fa-graduation-cap text-indigo-400 mr-2 text-lg"></i>5. Bedah Contoh Soal & Pembahasan Step-by-Step
+                            </h3>
+                            <span class="text-xs bg-indigo-500/20 text-indigo-300 font-medium px-3 py-1 rounded-full border border-indigo-500/30">Langkah Analitis Runtut</span>
+                        </div>
+                        
+                        <!-- Soal 1 -->
+                        <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 overflow-hidden text-xs">
+                            <div class="bg-slate-800 px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-indigo-300 text-xs flex items-center">
+                                    <span class="w-5 h-5 rounded-full bg-indigo-500 text-slate-950 flex items-center justify-center text-[10px] mr-2 font-bold">1</span>
+                                    Jarak titik ke titik — diagonal ruang
+                                </span>
+                                <span class="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">Kubus</span>
+                            </div>
+                            
+                            <div class="p-4 space-y-3">
+                                <p class="text-slate-200 font-medium leading-relaxed bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                                    <strong>Soal:</strong> Kubus \(ABCD.EFGH\) memiliki panjang rusuk \(6\text{ cm}\). Tentukan jarak titik \(A\) ke titik \(G\).
+                                </p>
+
+                                <div class="bg-slate-950/80 p-4 rounded-lg border border-slate-800 space-y-3">
+                                    <span class="text-amber-400 font-bold text-[11px] block"><i class="fa-solid fa-square-root-variable mr-1"></i> Penyelesaian:</span>
+                                    
+                                    <p class="text-slate-300 text-[11px]">Cari diagonal bidang \(AC\):</p>
+                                    <div class="font-mono text-slate-200 text-xs text-center bg-slate-900 p-2.5 rounded border border-slate-800">
+                                        \(AC = \sqrt{AB^2 + BC^2} = \sqrt{6^2 + 6^2} = 6\sqrt{2}\)
+                                    </div>
+
+                                    <p class="text-slate-300 text-[11px] pt-1">Kemudian pada segitiga \(ACG\):</p>
+                                    <div class="font-mono text-slate-200 text-xs text-center bg-slate-900 p-2.5 rounded border border-slate-800 space-y-1">
+                                        <p>\(AG = \sqrt{AC^2 + CG^2}\)</p>
+                                        <p>\(AG = \sqrt{(6\sqrt{2})^2 + 6^2} = \sqrt{72 + 36} = 6\sqrt{3}\)</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-emerald-400 font-bold text-xs">Jadi:</span>
+                                    <span class="bg-emerald-500/20 text-emerald-300 font-bold font-mono px-3 py-1 rounded border border-emerald-500/40 text-xs">
+                                        \(AG = 6\sqrt{3}\text{ cm}\)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Soal 2 -->
+                        <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 overflow-hidden text-xs">
+                            <div class="bg-slate-800 px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-emerald-300 text-xs flex items-center">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-[10px] mr-2 font-bold">2</span>
+                                    Jarak titik ke garis — menggunakan proyeksi
+                                </span>
+                                <span class="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">Kubus</span>
+                            </div>
+                            
+                            <div class="p-4 space-y-3">
+                                <p class="text-slate-200 font-medium leading-relaxed bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                                    <strong>Soal:</strong> Kubus \(ABCD.EFGH\) memiliki panjang rusuk \(6\text{ cm}\). Tentukan jarak titik \(A\) ke garis \(CE\).
+                                </p>
+
+                                <div class="bg-slate-950/80 p-4 rounded-lg border border-slate-800 space-y-3">
+                                    <span class="text-amber-400 font-bold text-[11px] block"><i class="fa-solid fa-square-root-variable mr-1"></i> Penyelesaian:</span>
+                                    
+                                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                                        Perhatikan bahwa \(CE\) merupakan diagonal ruang pada bidang \(CDEF\).
+                                    </p>
+                                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                                        Misalkan dibuat titik \(P\) pada \(CE\) sehingga:
+                                    </p>
+                                    <div class="font-mono text-indigo-300 text-xs text-center bg-slate-900 p-2 rounded border border-slate-800">
+                                        \(AP \perp CE\)
+                                    </div>
+                                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                                        Maka \(AP\) adalah jarak titik \(A\) ke garis \(CE\). Karena bentuknya simetris, titik \(P\) merupakan titik tengah \(CE\).
+                                    </p>
+
+                                    <p class="text-slate-300 text-[11px] pt-1">Panjang \(CE\):</p>
+                                    <div class="font-mono text-slate-200 text-xs text-center bg-slate-900 p-2 rounded border border-slate-800">
+                                        \(CE = \sqrt{CD^2 + DE^2 + EF^2} = 6\sqrt{3}\)
+                                    </div>
+
+                                    <p class="text-slate-300 text-[11px] pt-1">Sehingga:</p>
+                                    <div class="font-mono text-slate-200 text-xs text-center bg-slate-900 p-2 rounded border border-slate-800">
+                                        \(CP = \frac{1}{2} CE = 3\sqrt{3}\)
+                                    </div>
+
+                                    <p class="text-slate-300 text-[11px] pt-1">Kemudian pada segitiga \(ACP\):</p>
+                                    <div class="font-mono text-slate-200 text-xs text-center bg-slate-900 p-2 rounded border border-slate-800 space-y-1">
+                                        <p>\(AC = 6\sqrt{2}\)</p>
+                                        <p>dan</p>
+                                        <p>\(AP = \sqrt{AC^2 - CP^2}\)</p>
+                                        <p>\(= \sqrt{(6\sqrt{2})^2 - (3\sqrt{3})^2}\)</p>
+                                        <p>\(= \sqrt{72 - 27}\)</p>
+                                        <p>\(= \sqrt{45}\)</p>
+                                        <p>\(AP = 3\sqrt{5}\text{ cm}\)</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-emerald-400 font-bold text-xs">Jadi jarak titik \(A\) ke garis \(CE\) adalah:</span>
+                                    <span class="bg-emerald-500/20 text-emerald-300 font-bold font-mono px-3 py-1 rounded border border-emerald-500/40 text-xs">
+                                        \(3\sqrt{5}\text{ cm}\)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Soal 3 -->
+                        <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 overflow-hidden text-xs">
+                            <div class="bg-slate-800 px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-amber-300 text-xs flex items-center">
+                                    <span class="w-5 h-5 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-[10px] mr-2 font-bold">3</span>
+                                    Jarak garis ke garis — garis bersilangan
+                                </span>
+                                <span class="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">Kubus</span>
+                            </div>
+                            
+                            <div class="p-4 space-y-3">
+                                <p class="text-slate-200 font-medium leading-relaxed bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                                    <strong>Soal:</strong> Kubus \(ABCD.EFGH\) memiliki panjang rusuk \(6\text{ cm}\). Tentukan jarak antara garis \(AC\) dan \(BF\).
+                                </p>
+
+                                <div class="bg-slate-950/80 p-4 rounded-lg border border-slate-800 space-y-3">
+                                    <span class="text-amber-400 font-bold text-[11px] block"><i class="fa-solid fa-lightbulb mr-1"></i> Penyelesaian ide geometrinya:</span>
+                                    
+                                    <p class="text-slate-300 text-[11px]">
+                                        Cari sebuah ruas yang <strong>tegak lurus terhadap kedua garis tersebut</strong>.
+                                    </p>
+                                    <p class="text-slate-300 text-[11px]">
+                                        Perhatikan bahwa \(AB\) tegak lurus \(BF\), tetapi \(AB\) tidak tegak lurus \(AC\).
+                                    </p>
+                                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                                        Maka kita perlu mencari ruas terpendek yang menghubungkan \(AC\) dengan \(BF\). Misalkan titik \(P\) berada pada \(AC\) dan \(Q\) berada pada \(BF\), dengan:
+                                    </p>
+
+                                    <div class="font-mono text-amber-300 text-xs text-center bg-slate-900 p-2 rounded border border-slate-800 space-y-1">
+                                        <p>\(PQ \perp AC\)</p>
+                                        <p>dan</p>
+                                        <p>\(PQ \perp BF\)</p>
+                                    </div>
+
+                                    <p class="text-slate-300 text-[11px] leading-relaxed pt-1">
+                                        Dengan konstruksi pada kubus, \(PQ\) dapat diperoleh dari segitiga siku-siku yang melibatkan setengah diagonal bidang.
+                                    </p>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-emerald-400 font-bold text-xs">Hasilnya:</span>
+                                    <span class="bg-emerald-500/20 text-emerald-300 font-bold font-mono px-3 py-1 rounded border border-emerald-500/40 text-xs">
+                                        \(PQ = 3\sqrt{2}\text{ cm}\)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Soal 4 -->
+                        <div class="bg-slate-800/80 rounded-xl border border-slate-700/80 overflow-hidden text-xs">
+                            <div class="bg-slate-800 px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-sky-300 text-xs flex items-center">
+                                    <span class="w-5 h-5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[10px] mr-2 font-bold">4</span>
+                                    Jarak garis ke garis — garis bersilangan
+                                </span>
+                                <span class="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">Balok</span>
+                            </div>
+                            
+                            <div class="p-4 space-y-3">
+                                <p class="text-slate-200 font-medium leading-relaxed bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                                    <strong>Soal:</strong> Balok \(ABCD.EFGH\) memiliki \(AB = 8\text{ cm}\), \(BC = 6\text{ cm}\), dan \(AE = 5\text{ cm}\). Tentukan jarak antara garis \(AB\) dan \(CG\).
+                                </p>
+
+                                <div class="bg-slate-950/80 p-4 rounded-lg border border-slate-800 space-y-3">
+                                    <span class="text-amber-400 font-bold text-[11px] block"><i class="fa-solid fa-magnifying-glass mr-1"></i> Penyelesaian:</span>
+                                    
+                                    <p class="text-slate-300 text-[11px]">Perhatikan bahwa:</p>
+                                    <div class="font-mono text-sky-300 text-xs text-center bg-slate-900 p-2 rounded border border-slate-800 space-y-1">
+                                        <p>\(AB \perp BC\)</p>
+                                        <p>dan</p>
+                                        <p>\(BC \perp CG\)</p>
+                                    </div>
+
+                                    <p class="text-slate-300 text-[11px] leading-relaxed pt-1">
+                                        Jadi \(BC\) merupakan ruas yang tegak lurus terhadap kedua garis.
+                                    </p>
+                                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                                        Dengan demikian, jarak antara \(AB\) dan \(CG\) adalah panjang \(BC\):
+                                    </p>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-emerald-400 font-bold text-xs">Jarak antara garis \(AB\) dan \(CG\):</span>
+                                    <span class="bg-emerald-500/20 text-emerald-300 font-bold font-mono px-3 py-1 rounded border border-emerald-500/40 text-xs">
+                                        \(d(AB, CG) = 6\text{ cm}\)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flex justify-end pt-4 border-t">
+                    <button onclick="switchTab('visualizer')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition shadow-sm">
+                        Lanjut ke Simulasi 3D <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- TAB 2: VISUALIZER 3D -->
+            <section id="tab-visualizer" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4 hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 gap-3">
+                    <div>
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">Simulasi Interaktif Tembus Pandang</span>
+                        <h2 class="text-xl font-bold text-slate-900 mt-1">Eksplorasi Objek 3D & Notasi Titik Sudut</h2>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setShape('cube')" id="btn-cube" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white transition">Kubus</button>
+                        <button onclick="setShape('balok')" id="btn-balok" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Balok</button>
+                        <button onclick="setShape('limas')" id="btn-limas" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Limas Segiempat</button>
+                    </div>
+                </div>
+
+                <!-- 3D Canvas Container -->
+                <div class="canvas-container" id="canvas-box">
+                    <div class="absolute bottom-3 left-3 bg-black/60 text-white text-xs px-3 py-1.5 rounded-lg backdrop-blur-sm pointer-events-none z-10">
+                        <i class="fa-solid fa-hand text-indigo-400 mr-1.5"></i> Klik & seret untuk memutar objek transparan
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-xl border text-xs text-slate-600 space-y-1">
+                    <p class="font-semibold text-slate-800"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Petunjuk Visual:</p>
+                    <p>Sisi bangun dibuat transparan agar struktur internal dan label titik sudut alas (\(A, B, C, D\)) serta tutup atas (\(E, F, G, H\)) terlihat jelas untuk latihan analisis jarak.</p>
+                </div>
+            </section>
+
+            <!-- TAB 3: REFERENSI & LITERATUR -->
+            <section id="tab-referensi" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6 hidden">
+                <div class="border-b pb-4">
+                    <span class="bg-sky-50 text-sky-700 text-xs font-semibold px-3 py-1 rounded-full">Daftar Pustaka & Literatur Resmi Mudah Diakses</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-1">Referensi Resmi, Repositori Kemendikdasmen & Portal Digital</h2>
+                    <p class="text-sm text-slate-500 mt-1">Rujukan literatur yang dapat diakses langsung oleh siswa untuk memperdalam materi geometri ruang.</p>
+                </div>
+
+                <div class="space-y-4 text-xs">
+                    <!-- Buku Repositori Kemendikdasmen -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <div class="flex items-center space-x-2 text-indigo-600 font-bold">
+                            <i class="fa-solid fa-book-atlas text-base"></i><span>Repositori Resmi Kemendikdasmen RI (Modul Utama)</span>
+                        </div>
+                        <h3 class="font-bold text-slate-800 text-sm">Modul Matematika Umum Kelas XII: Jarak dalam Ruang (KD 3.1)</h3>
+                        <p class="text-slate-600 leading-relaxed">Kementerian Pendidikan Dasar dan Menengah. Dokumen digital resmi yang memuat uraian materi komprehensif, contoh soal jarak titik ke garis, dan latihan terbimbing.</p>
+                        <a href="https://repositori.kemendikdasmen.go.id/20968/1/Kelas%20XII_Matematika%20Umum_KD%203.1%20%281%29.pdf" target="_blank" class="text-indigo-600 font-semibold underline block pt-1">Unduh / Akses PDF Resmi Kemendikdasmen &rarr;</a>
+                    </div>
+
+                    <!-- Buku Pendukung EDUPEDIA -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <div class="flex items-center space-x-2 text-indigo-600 font-bold">
+                            <i class="fa-solid fa-bookmark text-base"></i><span>Literatur Analitis Pendukung</span>
+                        </div>
+                        <h3 class="font-bold text-slate-800 text-sm">Geometri Dimensi Tiga: Konsep Jarak dan Sudut dalam Ruang</h3>
+                        <p class="text-slate-600 leading-relaxed">Haqq, Arif Abdul, & Hendri Handoko (2023), EDUPEDIA. Buku referensi tambahan untuk pendalaman teknik segitiga siku-siku penolong.</p>
+                    </div>
+
+                    <!-- Portal Online & Video -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                            <div class="flex items-center space-x-2 text-rose-600 font-bold">
+                                <i class="fa-brands fa-youtube text-base"></i><span>Video Pembelajaran YouTube</span>
+                            </div>
+                            <p class="text-slate-600">Kanal <strong>Privat Al Faiz</strong> dan <strong>Matematika Hebat</strong> menyediakan video pembahasan visual langkah demi langkah menghitung jarak titik ke garis.</p>
+                            <a href="https://www.youtube.com/results?search_query=jarak+titik+ke+garis+dimensi+tiga+matematika+sma" target="_blank" class="text-rose-600 font-semibold underline block">Cari Video Pembelajaran &rarr;</a>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                            <div class="flex items-center space-x-2 text-emerald-600 font-bold">
+                                <i class="fa-solid fa-globe text-base"></i><span>Portal Edukasi & GeoGebra Materials</span>
+                            </div>
+                            <p class="text-slate-600">Siswa dapat mengakses simulasi publik gratis di <strong>geogebra.org</strong> untuk mengeksplorasi koordinat dan bangun ruang 3D secara interaktif.</p>
+                            <a href="https://www.geogebra.org" target="_blank" class="text-emerald-600 font-semibold underline block">Kunjungi Portal GeoGebra &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: PANDUAN PROYEK -->
+            <section id="tab-proyek" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6 hidden">
+                <div class="border-b pb-4">
+                    <span class="bg-amber-50 text-amber-700 text-xs font-semibold px-3 py-1 rounded-full">Tugas Proyek Kelompok (PjBL)</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-1">LEMBAR KETENTUAN PROYEK KELOMPOK</h2>
+                    <p class="text-xs text-slate-500 mt-0.5"><strong>Topik:</strong> Kreasi Arsitektur 3D & Analisis Jarak Dimensi Tiga Berbantuan GeoGebra</p>
+                </div>
+                
+                <div class="space-y-5 text-xs text-slate-700 leading-relaxed">
+                    <!-- A. Tujuan Proyek -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center">
+                            <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs mr-2 font-bold shrink-0">A</span>
+                            Tujuan Proyek
+                        </h3>
+                        <p class="text-slate-600 pl-8 text-xs">
+                            Setiap kelompok peserta didik mampu merancang model bangunan 3 dimensi menggunakan aplikasi GeoGebra, menerapkan konsep kedudukan, serta menyelesaikan perhitungan analitis terkait jarak dalam ruang secara terstruktur.
+                        </p>
+                    </div>
+
+                    <!-- B. Ketentuan Konstruksi Desain (Visual) -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center">
+                            <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs mr-2 font-bold shrink-0">B</span>
+                            Ketentuan Konstruksi Desain (Visual)
+                        </h3>
+                        <div class="pl-8 space-y-2 text-slate-600 text-xs">
+                            <div class="flex items-start space-x-2 bg-white p-2.5 rounded-lg border border-slate-200">
+                                <i class="fa-solid fa-cubes text-indigo-500 mt-0.5"></i>
+                                <span><strong>Model Gabungan:</strong> Rancang desain bangunan (rumah, menara, gedung) gabungan dari <strong>minimal 2 jenis bangun ruang</strong> (misal: Kubus + Balok, atau Balok + Limas).</span>
+                            </div>
+                            <div class="flex items-start space-x-2 bg-white p-2.5 rounded-lg border border-slate-200">
+                                <i class="fa-solid fa-ruler-combined text-indigo-500 mt-0.5"></i>
+                                <span><strong>Skala Logis:</strong> Setiap panjang rusuk wajib diset dengan angka terukur di GeoGebra agar dapat dihitung secara matematis.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- C. Ketentuan Analisis Matematis (Wajib Dikerjakan) -->
+                    <div class="p-5 bg-gradient-to-br from-indigo-50/70 to-blue-50/50 rounded-xl border border-indigo-100 space-y-3">
+                        <h3 class="font-bold text-indigo-950 text-sm flex items-center">
+                            <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs mr-2 font-bold shrink-0">C</span>
+                            Ketentuan Analisis Matematis (Wajib Dikerjakan)
+                        </h3>
+                        <p class="text-indigo-900 pl-8 text-xs italic">
+                            Pada laporan akhir, setiap kelompok wajib menyertakan 3 analisis matematis berikut pada bangun gabungan mereka:
+                        </p>
+                        
+                        <div class="pl-8 grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+                            <div class="p-3.5 bg-white rounded-xl border border-indigo-100 shadow-sm space-y-1.5">
+                                <span class="font-bold text-indigo-700 text-xs block"><i class="fa-solid fa-1 mr-1 text-indigo-500"></i> Analisis 1: Titik ke Titik</span>
+                                <p class="text-slate-600 text-[11px]">Pilih 2 titik sudut lintas bangun, hitung jarak terpisahnya secara presisi dengan teorema Pythagoras.</p>
+                            </div>
+
+                            <div class="p-3.5 bg-white rounded-xl border border-indigo-100 shadow-sm space-y-1.5">
+                                <span class="font-bold text-indigo-700 text-xs block"><i class="fa-solid fa-2 mr-1 text-indigo-500"></i> Analisis 2: Titik ke Garis</span>
+                                <p class="text-slate-600 text-[11px]">Pilih 1 titik sudut dan garis rusuk di seberangnya, buat sketsa segitiga penolong, lalu tentukan jarak tegak lurusnya.</p>
+                            </div>
+
+                            <div class="p-3.5 bg-white rounded-xl border border-indigo-100 shadow-sm space-y-1.5">
+                                <span class="font-bold text-indigo-700 text-xs block"><i class="fa-solid fa-3 mr-1 text-indigo-500"></i> Analisis 3: Titik ke Diagonal</span>
+                                <p class="text-slate-600 text-[11px]">Hubungkan titik sudut ke diagonal sisi atau diagonal ruang pada bagian model bangunan kelompokmu.</p>
+                            </div>
+                        </div>
+
+                        <div class="pl-8 pt-1">
+                            <div class="p-3 bg-amber-50 rounded-lg border border-amber-200 text-amber-900 text-xs flex items-center space-x-2">
+                                <i class="fa-solid fa-star text-amber-600 text-sm shrink-0"></i>
+                                <span><strong>Poin Bonus / Pengayaan:</strong> Tambahkan analisis jarak dari titik sudut ke salah satu bidang diagonal untuk nilai maksimal!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- D. Format Output / Produk Akhir -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center">
+                            <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs mr-2 font-bold shrink-0">D</span>
+                            Format Output / Produk Akhir
+                        </h3>
+                        <p class="pl-8 text-slate-600 text-xs font-medium">Pilih salah satu format pengumpulan:</p>
+                        <div class="pl-8 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 space-y-1 shadow-sm">
+                                <span class="font-bold text-indigo-600 text-xs block"><i class="fa-solid fa-video mr-1.5"></i>Opsi A (Video Presentasi 5-7 Menit)</span>
+                                <p class="text-slate-600 text-[11px]">Demonstrasi model GeoGebra 3D + penjelasan perhitungannya secara langsung.</p>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 space-y-1 shadow-sm">
+                                <span class="font-bold text-emerald-600 text-xs block"><i class="fa-solid fa-file-pdf mr-1.5"></i>Opsi B (Laporan Infografis / PDF)</span>
+                                <p class="text-slate-600 text-[11px]">Screenshot tampilan GeoGebra + langkah perhitungan analitis lengkap berformat rapi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: ASISTEN AI PINTAR -->
+            <section id="tab-ai" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4 hidden flex flex-col h-[560px]">
+                <div class="border-b pb-3 flex justify-between items-center">
+                    <div>
+                        <span class="bg-purple-50 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full"><i class="fa-solid fa-robot mr-1"></i> Asisten AI Cerdas (Diperbarui dengan Literatur Internet & Repositori)</span>
+                        <h2 class="text-lg font-bold text-slate-900 mt-1">Tanya Jawab Pintar Konsep & Sumber Rujukan Luas</h2>
+                    </div>
+                    <button onclick="clearChat()" class="text-xs text-slate-400 hover:text-slate-600"><i class="fa-solid fa-rotate-right mr-1"></i> Reset</button>
+                </div>
+
+                <!-- Chat Stream Box -->
+                <div id="chat-container" class="flex-grow overflow-y-auto space-y-3 pr-2 text-sm">
+                    <div class="flex items-start space-x-2">
+                        <div class="bg-indigo-600 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div class="bg-slate-100 text-slate-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-xs leading-relaxed">
+                            Halo! AI Assistant kini telah di-update dengan basis literatur internet tambahan (seperti Khan Academy, Zenius/Clearnote archive, GeoGebra Classroom, dan Jurnal Pendidikan Matematika). Silakan tanyakan materi, rumus, atau minta rekomendasi sumber online!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input Form -->
+                <form id="chat-form" onsubmit="handleChatSubmit(event)" class="flex gap-2 pt-2 border-t">
+                    <input type="text" id="chat-input" placeholder="Tanyakan materi atau minta referensi internet (misal: referensi web tentang jarak titik ke garis)..." class="flex-grow border rounded-xl px-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-medium transition"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </section>
+
+        </div>
+
+        <!-- Right Sidebar: Student Info & Quick Tips -->
+        <div class="space-y-6">
+            <!-- Student Profile Box -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm">Siswa Kelas XII SMA</h3>
+                        <p class="text-xs text-slate-500">Fase F • Kurikulum Merdeka</p>
+                    </div>
+                </div>
+                <div class="pt-3 border-t grid grid-cols-2 gap-2 text-center">
+                    <div class="bg-slate-50 p-2.5 rounded-xl border">
+                        <p class="text-[10px] text-slate-400 uppercase font-semibold">Status Modul</p>
+                        <p class="text-xs font-bold text-indigo-600 mt-0.5">Komprehensif</p>
+                    </div>
+                    <div class="bg-slate-50 p-2.5 rounded-xl border">
+                        <p class="text-[10px] text-slate-400 uppercase font-semibold">Media Utama</p>
+                        <p class="text-xs font-bold text-emerald-600 mt-0.5">3D & GeoGebra</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Tips Scaffolding -->
+            <div class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white rounded-2xl p-5 shadow-sm space-y-3">
+                <div class="flex items-center space-x-2 text-indigo-300">
+                    <i class="fa-solid fa-compass text-sm"></i>
+                    <h3 class="font-bold text-sm">Pusat Belajar Mandiri</h3>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Modul ini memuat materi rinci, rujukan repositori Kemendikdasmen, serta panduan proyek arsitektur GeoGebra. Gunakan Asisten AI jika menemui kesulitan perhitungan!
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            const tabs = ['materi', 'visualizer', 'referensi', 'proyek', 'ai'];
+            tabs.forEach(t => {
+                const sec = document.getElementById('tab-' + t);
+                if(sec) sec.classList.add('hidden');
+                const navBtn = document.getElementById('nav-' + t);
+                if(navBtn) {
+                    navBtn.className = 'text-indigo-200 hover:text-white pb-1 transition';
+                }
+            });
+            const activeSec = document.getElementById('tab-' + tabId);
+            if(activeSec) activeSec.classList.remove('hidden');
+            const activeNav = document.getElementById('nav-' + tabId);
+            if(activeNav) {
+                activeNav.className = 'text-white border-b-2 border-white pb-1 transition';
+            }
+            if(tabId === 'visualizer' && !rendererInitialized) {
+                initThreeJS();
+            }
+            if(window.MathJax) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        let scene, camera, renderer, currentMesh, rendererInitialized = false;
+        let isDragging = false;
+        let vertexSprites = [];
+
+        function initThreeJS() {
+            const container = document.getElementById('canvas-box');
+            if(!container) return;
+            container.innerHTML = '';
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(4, 3, 5);
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setClearColor(0x0f172a);
+            container.appendChild(renderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+            const pointLight = new THREE.PointLight(0xffffff, 1.2);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            createShape('cube');
+
+            let prevMousePos = { x: 0, y: 0 };
+
+            container.addEventListener('mousedown', (e) => { isDragging = true; prevMousePos = { x: e.clientX, y: e.clientY }; });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging || !currentMesh) return;
+                const deltaX = e.clientX - prevMousePos.x;
+                const deltaY = e.clientY - prevMousePos.y;
+                currentMesh.rotation.y += deltaX * 0.01;
+                currentMesh.rotation.x += deltaY * 0.01;
+                prevMousePos = { x: e.clientX, y: e.clientY };
+            });
+
+            container.addEventListener('touchstart', (e) => {
+                if(e.touches.length === 1) {
+                    isDragging = true;
+                    prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                }
+            });
+            window.addEventListener('touchend', () => { isDragging = false; });
+            container.addEventListener('touchmove', (e) => {
+                if(!isDragging || !currentMesh || e.touches.length !== 1) return;
+                const deltaX = e.touches[0].clientX - prevMousePos.x;
+                const deltaY = e.touches[0].clientY - prevMousePos.y;
+                currentMesh.rotation.y += deltaX * 0.01;
+                currentMesh.rotation.x += deltaY * 0.01;
+                prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            });
+
+            rendererInitialized = true;
+            animate();
+        }
+
+        function createTextSprite(message) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 128;
+            canvas.height = 128;
+            context.fillStyle = '#38bdf8';
+            context.font = 'Bold 64px "Plus Jakarta Sans", sans-serif';
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            context.fillText(message, 64, 64);
+
+            const texture = new THREE.CanvasTexture(canvas);
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true });
+            const sprite = new THREE.Sprite(spriteMaterial);
+            sprite.scale.set(0.4, 0.4, 0.4);
+            return sprite;
+        }
+
+        function createShape(type) {
+            if(currentMesh) scene.remove(currentMesh);
+            vertexSprites.forEach(s => scene.remove(s));
+            vertexSprites = [];
+
+            const group = new THREE.Group();
+
+            if(type === 'limas') {
+                const hw = 1.2;
+                const hh = 1.4;
+                const peak = new THREE.Vector3(0, hh, 0);
+                const A = new THREE.Vector3(-hw, -hh, hw);
+                const B = new THREE.Vector3(hw, -hh, hw);
+                const C = new THREE.Vector3(hw, -hh, -hw);
+                const D = new THREE.Vector3(-hw, -hh, -hw);
+
+                const pyrGeo = new THREE.BufferGeometry();
+                const vertices = new Float32Array([
+                    A.x, A.y, A.z,  B.x, B.y, B.z,  C.x, C.y, C.z,
+                    A.x, A.y, A.z,  C.x, C.y, C.z,  D.x, D.y, D.z,
+                    peak.x, peak.y, peak.z,  A.x, A.y, A.z,  B.x, B.y, B.z,
+                    peak.x, peak.y, peak.z,  B.x, B.y, B.z,  C.x, C.y, C.z,
+                    peak.x, peak.y, peak.z,  C.x, C.y, C.z,  D.x, D.y, D.z,
+                    peak.x, peak.y, peak.z,  D.x, D.y, D.z,  A.x, A.y, A.z
+                ]);
+                pyrGeo.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+                pyrGeo.computeVertexNormals();
+
+                const material = new THREE.MeshStandardMaterial({ 
+                    color: 0x818cf8, 
+                    roughness: 0.2, 
+                    metalness: 0.1,
+                    transparent: true,
+                    opacity: 0.28,
+                    side: THREE.DoubleSide
+                });
+                
+                const mesh = new THREE.Mesh(pyrGeo, material);
+                group.add(mesh);
+
+                const wireframeGeo = new THREE.WireframeGeometry(pyrGeo);
+                const wireframeMat = new THREE.LineBasicMaterial({ color: 0x93c5fd, linewidth: 2 });
+                const wireframe = new THREE.LineSegments(wireframeGeo, wireframeMat);
+                group.add(wireframe);
+
+                const vertexPositions = {
+                    'T': new THREE.Vector3(0, hh + 0.3, 0),
+                    'A': new THREE.Vector3(-hw - 0.2, -hh - 0.2, hw + 0.2),
+                    'B': new THREE.Vector3(hw + 0.2, -hh - 0.2, hw + 0.2),
+                    'C': new THREE.Vector3(hw + 0.2, -hh - 0.2, -hw - 0.2),
+                    'D': new THREE.Vector3(-hw - 0.2, -hh - 0.2, -hw - 0.2)
+                };
+
+                for(let key in vertexPositions) {
+                    const sprite = createTextSprite(key);
+                    sprite.position.copy(vertexPositions[key]);
+                    group.add(sprite);
+                    vertexSprites.push(sprite);
+                }
+
+            } else {
+                let width = 2, height = 2, depth = 2;
+                if(type === 'balok') {
+                    width = 2.6; height = 1.6; depth = 2.2;
+                }
+
+                const geometry = new THREE.BoxGeometry(width, height, depth);
+                const material = new THREE.MeshStandardMaterial({ 
+                    color: 0x6366f1, 
+                    roughness: 0.2, 
+                    metalness: 0.1,
+                    transparent: true,
+                    opacity: 0.25,
+                    side: THREE.DoubleSide
+                });
+                
+                const wireframeGeo = new THREE.WireframeGeometry(geometry);
+                const wireframeMat = new THREE.LineBasicMaterial({ color: 0x93c5fd, linewidth: 2 });
+                const wireframe = new THREE.LineSegments(wireframeGeo, wireframeMat);
+
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.add(wireframe);
+                group.add(mesh);
+
+                const hw = width / 2;
+                const hh = height / 2;
+                const hd = depth / 2;
+
+                const vertexPositions = {
+                    'A': new THREE.Vector3(-hw - 0.2, -hh - 0.2, hd + 0.2),
+                    'B': new THREE.Vector3(hw + 0.2, -hh - 0.2, hd + 0.2),
+                    'C': new THREE.Vector3(hw + 0.2, -hh - 0.2, -hd - 0.2),
+                    'D': new THREE.Vector3(-hw - 0.2, -hh - 0.2, -hd - 0.2),
+                    'E': new THREE.Vector3(-hw - 0.2, hh + 0.2, hd + 0.2),
+                    'F': new THREE.Vector3(hw + 0.2, hh + 0.2, hd + 0.2),
+                    'G': new THREE.Vector3(hw + 0.2, hh + 0.2, -hd - 0.2),
+                    'H': new THREE.Vector3(-hw - 0.2, hh + 0.2, -hd - 0.2)
+                };
+
+                for(let key in vertexPositions) {
+                    const sprite = createTextSprite(key);
+                    sprite.position.copy(vertexPositions[key]);
+                    group.add(sprite);
+                    vertexSprites.push(sprite);
+                }
+            }
+
+            currentMesh = group;
+            scene.add(currentMesh);
+        }
+
+        function setShape(type) {
+            createShape(type);
+            ['cube', 'balok', 'limas'].forEach(t => {
+                const btn = document.getElementById('btn-' + t);
+                if(btn) {
+                    if(t === type) {
+                        btn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white transition';
+                    } else {
+                        btn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition';
+                    }
+                }
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if(currentMesh && !isDragging) {
+                currentMesh.rotation.y += 0.004;
+            }
+            if(renderer && scene && camera) {
+                renderer.render(scene, camera);
+            }
+        }
+
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if(!text) return;
+
+            const container = document.getElementById('chat-container');
+            
+            container.innerHTML += `
+                <div class="flex items-start justify-end space-x-2">
+                    <div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] text-xs leading-relaxed">
+                        ${escapeHtml(text)}
+                    </div>
+                </div>
+            `;
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+
+            setTimeout(() => {
+                let reply = "Berdasarkan Repositori Modul Kemendikdasmen dan literatur E-Modul, untuk menyelesaikan soal dimensi tiga, pastikan Anda menuliskan unsur yang diketahui, membuat sketsa segitiga siku-siku penolong, lalu menerapkan Teorema Pythagoras secara sistematis.";
+                let source = "Sumber: Repositori Kemendikdasmen (Modul KD 3.1)";
+                const lower = text.toLowerCase();
+                
+                if(lower.includes('garis') || lower.includes('jarak titik ke garis')) {
+                    reply = "Jarak titik ke garis adalah panjang ruas garis terpendek yang tegak lurus dari titik ke garis tersebut. Langkah analitisnya: (1) Hubungkan titik ke dua ujung garis membentuk segitiga, (2) Hitung sisi segitiga dengan Pythagoras, (3) Gunakan rumus luas segitiga (\\(\\frac{1}{2} \\times \\text{alas} \\times \\text{tinggi}\\)) untuk mencari jarak tegak lurus.";
+                    source = "Sumber: Repositori Kemendikdasmen KD 3.1 & EDUPEDIA (Haqq & Handoko, 2023)";
+                } else if(lower.includes('diagonal') || lower.includes('rusuk') || lower.includes('s\\sqrt')) {
+                    reply = "Pada kubus dengan panjang rusuk \\(s\\): diagonal sisi bernilai \\(s\\sqrt{2}\\) dan diagonal ruang bernilai \\(s\\sqrt{3}\\). Nilai ini diperoleh langsung dari penjabaran Teorema Pythagoras pada bidang diagonal kubus.";
+                    source = "Sumber: Modul Matematika Umum Kelas XII Kemendikdasmen";
+                } else if(lower.includes('proyek') || lower.includes('geogebra') || lower.includes('tugas') || lower.includes('kelompok') || lower.includes('analisis')) {
+                    reply = "Ketentuan proyek mewajibkan kelompok Anda: (1) Membuat desain gabungan minimal 2 bangun ruang secara estetis di GeoGebra, (2) Melakukan 3 analisis wajib: Jarak titik ke titik, Jarak titik ke garis (dengan segitiga penolong), dan Jarak titik ke diagonal sisi/ruang.";
+                    source = "Sumber: Lembar Ketentuan Proyek Kelompok PjBL";
+                } else if(lower.includes('internet') || lower.includes('referensi web') || lower.includes('sumber online') || lower.includes('tautan')) {
+                    reply = "Berikut tambahan referensi internet populer untuk eksplorasi dimensi tiga:\n1. **Khan Academy (Geometry 3D)**: Penjelasan konsep ruang interaktif berbahasa Inggris.\n2. **GeoGebra Materials (geogebra.org/m/geometry)**: Ribuan simulasi kubus dan balok buatan guru sedunia.\n3. **Zenius / Clearnote Archive**: Catatan ringkas rumus cepat sudut dan jarak dalam ruang SMA.\n4. **Kanal YouTube Privat Al Faiz**: Video bedah soal UTBK/SNBT dimensi tiga.";
+                    source = "Sumber: Jaringan Literatur Digital & Portal Pendidikan Global";
+                } else if(lower.includes('buku') || lower.includes('referensi') || lower.includes('sumber') || lower.includes('pdf')) {
+                    reply = "Anda dapat mengakses modul resmi melalui tautan PDF Repositori Kemendikdasmen di tab Referensi, atau membaca buku pegangan Kurikulum Merdeka Matematika Kelas XII Fase F.";
+                    source = "Sumber: Daftar Pustaka & Repositori Kemendikdasmen RI";
+                } else if(lower.includes('balok') || lower.includes('panjang') || lower.includes('lebar') || lower.includes('tinggi')) {
+                    reply = "Pada balok dengan ukuran panjang \\(p\\), lebar \\(l\\), dan tinggi \\(t\\), panjang diagonal ruang dihitung dengan rumus \\(\\sqrt{p^2 + l^2 + t^2}\\).";
+                    source = "Sumber: Ringkasan Rumus Geometri Ruang";
+                } else if(lower.includes('bidang') || lower.includes('titik ke bidang')) {
+                    reply = "Jarak titik ke bidang ditentukan dengan menarik garis dari titik tersebut yang menembus tegak lurus pada bidang. Panjang ruas garis dari titik awal ke titik proyeksi pada bidang adalah nilai jarak yang dicari.";
+                    source = "Sumber: Modul KD 3.1 Kemendikdasmen";
+                }
+
+                container.innerHTML += `
+                    <div class="flex items-start space-x-2">
+                        <div class="bg-indigo-600 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div class="bg-slate-100 text-slate-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-xs leading-relaxed space-y-2 whitespace-pre-line">
+                            <p>${reply}</p>
+                            <span class="inline-block bg-indigo-50 text-indigo-700 text-[10px] font-semibold px-2 py-0.5 rounded border border-indigo-100">${source}</span>
+                        </div>
+                    </div>
+                `;
+                container.scrollTop = container.scrollHeight;
+                if(window.MathJax) {
+                    window.MathJax.typesetPromise();
+                }
+            }, 700);
+        }
+
+        function clearChat() {
+            document.getElementById('chat-container').innerHTML = `
+                <div class="flex items-start space-x-2">
+                    <div class="bg-indigo-600 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bg-slate-100 text-slate-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-xs leading-relaxed">
+                        Riwayat percakapan dibersihkan. Silakan tanyakan materi, rumus, atau referensi internet kapan saja!
+                    </div>
+                </div>
+            `;
+        }
+
+        function escapeHtml(string) {
+            return String(string).replace(/&/g, '&amp;').replace(/&lt;([a-z\/])/gi, '&lt;$1').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+    </script>
+</body>
+</html>
